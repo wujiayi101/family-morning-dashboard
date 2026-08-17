@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="家庭晨間儀表板 — 天氣、穿衣、空氣質素、98A 巴士">
+  <title>家庭晨間儀表板</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="dashboard">
+    <header class="header">
+      <h1 class="greeting" id="greeting">早安</h1>
+      <div class="datetime">
+        <div class="time" id="time">--:--</div>
+        <div id="date">----</div>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="card weather-card" id="weather-card">
+        <div class="weather-icon" id="weather-icon">🌤️</div>
+        <div class="weather-main">
+          <div class="card-label">今日天氣 · <span id="weather-place">香港</span></div>
+          <div class="temp" id="temperature">--<span>°C</span></div>
+          <p class="weather-desc" id="weather-desc">載入中…</p>
+        </div>
+      </section>
+
+      <div class="metrics-row">
+        <section class="card metric-card" id="aqi-card">
+          <div class="card-label">空氣質素 PM2.5</div>
+          <div class="metric-value" id="aqi-value">--</div>
+          <div class="metric-sub" id="aqi-sub">載入中…</div>
+        </section>
+
+        <section class="card metric-card">
+          <div class="card-label">濕度</div>
+          <div class="metric-value" id="humidity">--</div>
+          <div class="metric-sub">香港天文台實時數據</div>
+        </section>
+      </div>
+
+      <section class="card dress-card">
+        <div class="dress-icon" id="dress-icon">👕</div>
+        <div>
+          <div class="card-label">穿衣指數</div>
+          <div class="dress-level" id="dress-level">載入中…</div>
+          <div class="dress-advice" id="dress-advice"></div>
+        </div>
+      </section>
+
+      <section class="card bus-card" id="bus-card">
+        <div class="bus-header">
+          <div>
+            <span class="bus-route" id="bus-route">98A</span>
+            <span class="bus-direction" id="bus-direction">→ 牛頭角方向</span>
+          </div>
+        </div>
+        <div class="bus-stop-name" id="bus-stop">--</div>
+        <div class="eta-list" id="eta-list">
+          <div class="eta-item"><div class="eta-minutes">--<span class="unit"> 分鐘</span></div></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p id="last-updated">最後更新：--</p>
+      <p>數據來源：香港天文台 · Open-Meteo · 九巴 ETA</p>
+    </footer>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

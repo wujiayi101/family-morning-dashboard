@@ -100,19 +100,18 @@ async function loadWeather() {
 
   document.getElementById("weather-icon").innerHTML =
     `<img src="${iconUrl}" alt="天氣" onerror="this.parentElement.textContent='${WEATHER_ICONS[iconCode] || "🌤️"}'">`;
-  document.getElementById("temperature").innerHTML =
-    `${placeData?.value ?? "--"}<span>°C</span>`;
+  document.getElementById("temperature").textContent =
+    `${placeData?.value ?? "--"}°C`;
   document.getElementById("weather-place").textContent = placeData?.place || "";
-  document.getElementById("weather-desc").textContent =
-    forecast.forecastDesc?.split("。")[0] + "。" || "";
+  document.getElementById("weather-place").title =
+    forecast.forecastDesc?.split("。")[0] || "";
   document.getElementById("humidity").textContent = `${humidity}%`;
 
   const temp = placeData?.value;
   if (typeof temp === "number") {
     const dress = getDressIndex(temp);
     document.getElementById("dress-icon").textContent = dress.icon;
-    document.getElementById("dress-level").textContent =
-      `${dress.label}（指數 ${dress.level}）`;
+    document.getElementById("dress-level").textContent = dress.label;
     document.getElementById("dress-advice").textContent = dress.advice;
   }
 }
@@ -128,8 +127,9 @@ async function loadAirQuality() {
   const level = pm25ToAqhiLevel(pm25 ?? 0);
   document.getElementById("aqi-value").innerHTML =
     `${Math.round(pm25 ?? aqi ?? 0)}<span class="aq-badge ${level.class}">${level.label}</span>`;
-  document.getElementById("aqi-sub").textContent =
-    `PM2.5 ${pm25?.toFixed(0) ?? "--"} µg/m³ · PM10 ${pm10?.toFixed(0) ?? "--"} µg/m³ · ${level.advice}`;
+  document.getElementById("aqi-label").textContent = "PM2.5";
+  document.getElementById("aqi-label").title =
+    `PM10 ${pm10?.toFixed(0) ?? "--"} µg/m³ · ${level.advice}`;
 }
 
 async function loadBus() {
@@ -163,12 +163,13 @@ async function loadBus() {
   }
 
   list.innerHTML = etas
-    .map((e) => {
+    .map((e, i) => {
       const mins = minutesUntil(e.eta);
       const time = formatTime(new Date(e.eta));
+      const rank = ["eta-near", "eta-mid", "eta-far"][i] || "eta-far";
       return `
-        <div class="eta-item">
-          <div class="eta-minutes">${mins}<span class="unit"> 分鐘</span></div>
+        <div class="eta-item ${rank}">
+          <div class="eta-minutes">${mins}<span class="unit">分</span></div>
           <div class="eta-time">${time} 到站</div>
         </div>`;
     })
@@ -178,7 +179,7 @@ async function loadBus() {
 async function refreshAll() {
   updateClock();
   const tasks = [
-    { fn: loadWeather, id: "weather-card" },
+    { fn: loadWeather, id: "info-bar" },
     { fn: loadAirQuality, id: "aqi-card" },
     { fn: loadBus, id: "bus-card" },
   ];

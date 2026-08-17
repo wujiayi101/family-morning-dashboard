@@ -6,11 +6,11 @@
   --text: #f5f7ff;
   --text-muted: rgba(245, 247, 255, 0.65);
   --accent: #ffb347;
-  --accent-soft: rgba(255, 179, 71, 0.2);
   --good: #6ee7a0;
   --moderate: #ffd166;
   --bad: #ff6b6b;
-  --bus: #7eb8ff;
+  --bus: #5eb3ff;
+  --bus-glow: rgba(94, 179, 255, 0.35);
 }
 
 * {
@@ -29,255 +29,324 @@ body {
   background: linear-gradient(145deg, var(--bg-start) 0%, var(--bg-end) 55%, #1e2749 100%);
   color: var(--text);
   min-height: 100vh;
-  overflow-x: hidden;
 }
 
 .dashboard {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 2rem 1.5rem 3rem;
+  padding: 1.5rem 1.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   gap: 1rem;
 }
 
 .greeting {
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-size: clamp(1.4rem, 3vw, 2rem);
   font-weight: 700;
-  letter-spacing: 0.02em;
 }
 
 .datetime {
   text-align: right;
   color: var(--text-muted);
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 .datetime .time {
-  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
   font-weight: 300;
   color: var(--text);
   font-variant-numeric: tabular-nums;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
 }
 
 .card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: 20px;
-  padding: 1.4rem 1.5rem;
+  border-radius: 18px;
   backdrop-filter: blur(12px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
 }
 
-.card-label {
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--text-muted);
-  margin-bottom: 0.75rem;
-}
+/* ── Compact info bar (single row) ── */
 
-.weather-card {
-  grid-column: span 7;
+.info-bar {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  min-height: 180px;
+  justify-content: space-between;
+  padding: 0.85rem 1.25rem;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+  overflow-x: auto;
 }
 
-.weather-icon img {
-  width: 96px;
-  height: 96px;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
 }
 
-.weather-main .temp {
-  font-size: clamp(3rem, 8vw, 4.5rem);
-  font-weight: 200;
+.info-icon img {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.info-emoji {
+  font-size: 1.6rem;
   line-height: 1;
+  flex-shrink: 0;
 }
 
-.weather-main .temp span {
-  font-size: 0.45em;
-  vertical-align: super;
-}
-
-.weather-desc {
-  margin-top: 0.5rem;
-  font-size: 1.15rem;
-  color: var(--text-muted);
-  max-width: 28ch;
-}
-
-.metrics-row {
-  grid-column: span 5;
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  gap: 1rem;
-}
-
-.metric-card {
+.info-body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  min-width: 0;
 }
 
-.metric-value {
-  font-size: clamp(1.8rem, 4vw, 2.4rem);
-  font-weight: 600;
+.info-value {
+  font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+  font-weight: 700;
   line-height: 1.2;
-}
-
-.metric-sub {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  margin-top: 0.35rem;
-}
-
-.dress-card {
-  grid-column: span 12;
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  background: linear-gradient(90deg, var(--accent-soft), transparent);
-  border-color: rgba(255, 179, 71, 0.25);
-}
-
-.dress-icon {
-  font-size: 2.8rem;
-  line-height: 1;
-}
-
-.dress-level {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--accent);
-}
-
-.dress-advice {
-  color: var(--text-muted);
-  margin-top: 0.25rem;
-  font-size: 1.05rem;
-}
-
-.bus-card {
-  grid-column: span 12;
-}
-
-.bus-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.bus-route {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--bus);
-}
-
-.bus-direction {
-  color: var(--text-muted);
-  font-size: 1rem;
-}
-
-.bus-stop-name {
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  color: var(--text-muted);
-}
-
-.eta-list {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.eta-item {
-  flex: 1;
-  min-width: 140px;
-  background: rgba(126, 184, 255, 0.12);
-  border: 1px solid rgba(126, 184, 255, 0.25);
-  border-radius: 14px;
-  padding: 1rem 1.2rem;
-  text-align: center;
-}
-
-.eta-minutes {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: var(--bus);
   font-variant-numeric: tabular-nums;
 }
 
-.eta-minutes .unit {
-  font-size: 0.45em;
-  font-weight: 400;
+.info-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.eta-time {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  margin-top: 0.25rem;
+.info-divider {
+  width: 1px;
+  height: 36px;
+  background: var(--card-border);
+  flex-shrink: 0;
 }
 
 .aq-badge {
   display: inline-block;
-  padding: 0.2em 0.65em;
+  padding: 0.1em 0.45em;
   border-radius: 999px;
-  font-size: 0.85em;
+  font-size: 0.7em;
   font-weight: 600;
-  margin-left: 0.5rem;
+  margin-left: 0.25rem;
+  vertical-align: middle;
 }
 
 .aq-low { background: rgba(110, 231, 160, 0.25); color: var(--good); }
 .aq-moderate { background: rgba(255, 209, 102, 0.25); color: var(--moderate); }
 .aq-high { background: rgba(255, 107, 107, 0.25); color: var(--bad); }
 
-.footer {
-  margin-top: 1.5rem;
+/* ── Bus hero section ── */
+
+.bus-hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.75rem 1.5rem 2rem;
+  background: linear-gradient(160deg, rgba(94, 179, 255, 0.18) 0%, rgba(255, 255, 255, 0.06) 60%);
+  border-color: rgba(94, 179, 255, 0.35);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.25), 0 0 60px var(--bus-glow);
+}
+
+.bus-hero-top {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.bus-badge {
+  background: var(--bus);
+  color: #0d1b2e;
+  border-radius: 16px;
+  padding: 0.6rem 1.4rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 20px var(--bus-glow);
+}
+
+.bus-route {
+  font-size: clamp(2.8rem, 8vw, 4.5rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.bus-meta {
+  min-width: 0;
+}
+
+.bus-direction {
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  font-weight: 600;
+  color: var(--bus);
+}
+
+.bus-stop-name {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+.eta-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  flex: 1;
+  align-items: stretch;
+}
+
+.eta-item {
+  border-radius: 20px;
+  padding: 1.5rem 1rem;
   text-align: center;
-  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 2px solid transparent;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+/* 最近一班 — 最亮 */
+.eta-item.eta-near {
+  background: rgba(94, 179, 255, 0.28);
+  border-color: #7ec8ff;
+  box-shadow: 0 0 40px rgba(126, 200, 255, 0.55), inset 0 0 24px rgba(126, 200, 255, 0.12);
+}
+
+.eta-item.eta-near .eta-minutes {
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(180, 220, 255, 0.8);
+}
+
+.eta-item.eta-near .eta-minutes .unit {
+  color: #b8e0ff;
+}
+
+.eta-item.eta-near .eta-time {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* 第二班 — 中等亮度 */
+.eta-item.eta-mid {
+  background: rgba(80, 160, 210, 0.14);
+  border-color: rgba(100, 175, 220, 0.55);
+  box-shadow: 0 0 16px rgba(100, 175, 220, 0.2);
+}
+
+.eta-item.eta-mid .eta-minutes {
+  color: #a8d4f5;
+}
+
+.eta-item.eta-mid .eta-minutes .unit {
+  color: #7eb8dd;
+}
+
+.eta-item.eta-mid .eta-time {
+  color: rgba(200, 225, 245, 0.65);
+}
+
+/* 第三班 — 最暗 */
+.eta-item.eta-far {
+  background: rgba(0, 0, 0, 0.22);
+  border-color: rgba(94, 179, 255, 0.2);
+  box-shadow: none;
+}
+
+.eta-item.eta-far .eta-minutes {
+  color: rgba(160, 190, 220, 0.55);
+}
+
+.eta-item.eta-far .eta-minutes .unit {
+  color: rgba(120, 155, 190, 0.45);
+}
+
+.eta-item.eta-far .eta-time {
+  color: rgba(160, 180, 210, 0.4);
+}
+
+.eta-minutes {
+  font-size: clamp(3rem, 10vw, 5.5rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.eta-minutes .unit {
+  font-size: 0.35em;
+  font-weight: 500;
+  color: var(--bus);
+}
+
+.eta-time {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  color: var(--text-muted);
+  margin-top: 0.6rem;
+}
+
+.footer {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.75rem;
   color: var(--text-muted);
 }
 
 .loading {
-  opacity: 0.5;
+  opacity: 0.45;
 }
 
 .error-text {
   color: var(--bad);
-  font-size: 0.95rem;
+  font-size: 1.1rem;
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem;
 }
 
-@media (max-width: 768px) {
-  .weather-card {
-    grid-column: span 12;
-    flex-direction: column;
-    text-align: center;
+@media (max-width: 640px) {
+  .info-bar {
+    padding: 0.75rem 1rem;
   }
 
-  .metrics-row {
-    grid-column: span 12;
+  .info-divider {
+    display: none;
   }
 
-  .dress-card {
+  .info-item {
+    flex: 0 0 auto;
+  }
+
+  .bus-hero-top {
     flex-direction: column;
-    text-align: center;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .eta-list {
+    grid-template-columns: 1fr;
+  }
+
+  .eta-item:first-child {
+    order: -1;
   }
 }

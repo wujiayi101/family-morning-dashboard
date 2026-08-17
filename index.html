@@ -17,56 +17,68 @@
       </div>
     </header>
 
-    <main class="grid">
-      <section class="card weather-card" id="weather-card">
-        <div class="weather-icon" id="weather-icon">🌤️</div>
-        <div class="weather-main">
-          <div class="card-label">今日天氣 · <span id="weather-place">香港</span></div>
-          <div class="temp" id="temperature">--<span>°C</span></div>
-          <p class="weather-desc" id="weather-desc">載入中…</p>
-        </div>
-      </section>
-
-      <div class="metrics-row">
-        <section class="card metric-card" id="aqi-card">
-          <div class="card-label">空氣質素 PM2.5</div>
-          <div class="metric-value" id="aqi-value">--</div>
-          <div class="metric-sub" id="aqi-sub">載入中…</div>
-        </section>
-
-        <section class="card metric-card">
-          <div class="card-label">濕度</div>
-          <div class="metric-value" id="humidity">--</div>
-          <div class="metric-sub">香港天文台實時數據</div>
-        </section>
-      </div>
-
-      <section class="card dress-card">
-        <div class="dress-icon" id="dress-icon">👕</div>
-        <div>
-          <div class="card-label">穿衣指數</div>
-          <div class="dress-level" id="dress-level">載入中…</div>
-          <div class="dress-advice" id="dress-advice"></div>
-        </div>
-      </section>
-
-      <section class="card bus-card" id="bus-card">
-        <div class="bus-header">
-          <div>
-            <span class="bus-route" id="bus-route">98A</span>
-            <span class="bus-direction" id="bus-direction">→ 牛頭角方向</span>
+    <main>
+      <section class="info-bar card" id="info-bar">
+        <div class="info-item" id="weather-card">
+          <div class="info-icon" id="weather-icon">🌤️</div>
+          <div class="info-body">
+            <span class="info-value" id="temperature">--°C</span>
+            <span class="info-label" id="weather-place">香港</span>
           </div>
         </div>
-        <div class="bus-stop-name" id="bus-stop">--</div>
+
+        <div class="info-divider" aria-hidden="true"></div>
+
+        <div class="info-item">
+          <span class="info-emoji">💧</span>
+          <div class="info-body">
+            <span class="info-value" id="humidity">--</span>
+            <span class="info-label">濕度</span>
+          </div>
+        </div>
+
+        <div class="info-divider" aria-hidden="true"></div>
+
+        <div class="info-item" id="aqi-card">
+          <span class="info-emoji">🌫️</span>
+          <div class="info-body">
+            <span class="info-value" id="aqi-value">--</span>
+            <span class="info-label" id="aqi-label">空氣質素</span>
+          </div>
+        </div>
+
+        <div class="info-divider" aria-hidden="true"></div>
+
+        <div class="info-item">
+          <span class="info-emoji" id="dress-icon">👕</span>
+          <div class="info-body">
+            <span class="info-value" id="dress-level">--</span>
+            <span class="info-label" id="dress-advice">穿衣</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="bus-hero card" id="bus-card">
+        <div class="bus-hero-top">
+          <div class="bus-badge">
+            <span class="bus-route" id="bus-route">98A</span>
+          </div>
+          <div class="bus-meta">
+            <div class="bus-direction" id="bus-direction">→ 牛頭角方向</div>
+            <div class="bus-stop-name" id="bus-stop">--</div>
+          </div>
+        </div>
         <div class="eta-list" id="eta-list">
-          <div class="eta-item"><div class="eta-minutes">--<span class="unit"> 分鐘</span></div></div>
+          <div class="eta-item">
+            <div class="eta-minutes">--<span class="unit">分</span></div>
+            <div class="eta-time">載入中</div>
+          </div>
         </div>
       </section>
     </main>
 
     <footer class="footer">
       <p id="last-updated">最後更新：--</p>
-      <p>數據來源：香港天文台 · Open-Meteo · 九巴 ETA</p>
     </footer>
   </div>
 

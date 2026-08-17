@@ -53,6 +53,31 @@ window.DASHBOARD_CONFIG = {
 查詢其他站點：  
 `https://data.etabus.gov.hk/v1/transport/kmb/route-stop/98A/outbound/1`
 
+## 部署到 Cloudflare Pages（推薦）
+
+### 方式 A：Wrangler 一鍵部署
+
+```bash
+npx wrangler login          # 首次需瀏覽器授權
+npx wrangler pages deploy . --project-name=family-morning-dashboard
+```
+
+部署完成後網址：`https://family-morning-dashboard.pages.dev`
+
+### 方式 B：GitHub Actions 自動部署
+
+1. 在 [Cloudflare Dashboard](https://dash.cloudflare.com/) → **My Profile → API Tokens** 建立 Token（權限：`Cloudflare Pages: Edit`）
+2. 在 GitHub repo **Settings → Secrets** 新增：
+   - `CLOUDFLARE_API_TOKEN` — 上一步的 Token
+   - `CLOUDFLARE_ACCOUNT_ID` — Cloudflare 帳戶 ID（Dashboard 右側可見）
+3. Push 到 `main` 分支即自動部署
+
+### 方式 C：Cloudflare Dashboard 連接 GitHub
+
+1. [Cloudflare Pages](https://dash.cloudflare.com/?to=/:account/pages) → **Create a project** → **Connect to Git**
+2. 選擇 `family-morning-dashboard` repo，Build settings 留空（純靜態站）
+3. Deploy
+
 ## 部署到 GitHub Pages
 
 1. Push 此 repo 到 GitHub

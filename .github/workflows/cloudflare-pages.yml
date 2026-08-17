@@ -11,14 +11,15 @@ jobs:
     permissions:
       contents: read
       deployments: write
+    name: Deploy to Cloudflare Pages
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Deploy to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: family-morning-dashboard
-          directory: .
+          command: pages deploy . --project-name=family-morning-dashboard
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}

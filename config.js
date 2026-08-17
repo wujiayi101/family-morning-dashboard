@@ -17,5 +17,5 @@ window.DASHBOARD_CONFIG = {
   airQualityLon: 114.17,
 
   // 自動刷新間隔（毫秒）
-  refreshInterval: 60000,
+  refreshInterval: 15000,
 };
